@@ -28,6 +28,8 @@ namespace WPF_LIBRARY
         {
             AddingUser addingUser = new AddingUser();
             addingUser.Show();
+            this.Close();
+
         }
         private void txtPassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {

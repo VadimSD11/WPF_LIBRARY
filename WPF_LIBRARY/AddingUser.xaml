@@ -7,7 +7,13 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStyle="None"
-         Title="AddingUser" Height="450" Width="800">
+        
+         Title="AddingUser" Height="450" Width="800"
+         MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        MouseLeftButtonUp="Window_MouseLeftButtonUp"
+        MouseMove="Window_MouseMove"
+        
+        >
     <Window.Resources>
         <Style x:Key="CustomCloseButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
@@ -121,6 +127,8 @@
 
     </Window.Resources>
     <Grid Background="#D6C8A5" Margin="0,-17,0,0">
+        <Line X1="85" Y1="100" X2="720" Y2="100" Stroke="Black" StrokeThickness="2"/>
+
         <TextBox x:Name="txtPassword" Style="{DynamicResource RoundedTextBox}" Foreground="White" TextAlignment="Center"  HorizontalAlignment="Left" Text="Password" TextWrapping="Wrap" VerticalAlignment="Top" Width="432" Height="28" PreviewMouseDown="txtPassword_PreviewMouseDown" LostFocus="txtPassword_LostFocus" Margin="190,193,0,0" />
         <TextBox x:Name="Email" HorizontalAlignment="Left" Style="{DynamicResource RoundedTextBox}" Foreground="White" TextAlignment="Center" Margin="190,129,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="432" Height="28"/>
         <TextBox x:Name="Contact" HorizontalAlignment="Left" Style="{DynamicResource RoundedTextBox}" Foreground="White" TextAlignment="Center" Margin="190,255,0,0" TextWrapping="Wrap" Text="Contact" VerticalAlignment="Top" Width="432" Height="28"/>

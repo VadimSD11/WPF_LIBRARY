@@ -21,7 +21,8 @@ namespace WPF_LIBRARY
     {
         private Button selectedButton;
         private Color slcolor = (Color)ColorConverter.ConvertFromString("#8A8370");
-
+        private bool isDragging = false;
+        private Point startPoint;
         public AddingUser()
         {
             InitializeComponent();
@@ -29,7 +30,29 @@ namespace WPF_LIBRARY
             selectedButton.Background = new SolidColorBrush(slcolor); // Set the initial background color for the selected button
 
         }
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            isDragging = true;
+            startPoint = e.GetPosition(this);
+        }
 
+        private void Window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            isDragging = false;
+        }
+
+        private void Window_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDragging)
+            {
+                Point currentPoint = e.GetPosition(this);
+                double offsetX = currentPoint.X - startPoint.X;
+                double offsetY = currentPoint.Y - startPoint.Y;
+
+                Left += offsetX;
+                Top += offsetY;
+            }
+        }
         private void txtPassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (txtPassword.Text == "Password")
