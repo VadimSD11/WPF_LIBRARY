@@ -15,22 +15,27 @@ using System.Windows.Shapes;
 namespace WPF_LIBRARY
 {
     /// <summary>
-    /// Interaction logic for AddingUser.xaml
+    /// Interaction logic for BookAdding.xaml
     /// </summary>
-    public partial class AddingUser : Window
+    public partial class BookAdding : Window
     {
         private Button selectedButton;
         private Color slcolor = (Color)ColorConverter.ConvertFromString("#8A8370");
         private bool isDragging = false;
         private Point startPoint;
-        Thickness oldbtnloc = new Thickness(0, 350, 0, 0);
-        Thickness newbtnloc = new Thickness(0,255,0,0);
-        public AddingUser()
+        Thickness two = new Thickness(0, 161, 0, 0);
+        Thickness three = new Thickness(0, 209, 0, 0);
+        Thickness four = new Thickness(0, 260, 0, 0);
+        Thickness five = new Thickness(0, 313, 0, 0);
+        Thickness six = new Thickness(0, 364, 0, 0);
+        Thickness seven = new Thickness(0, 417, 0, 0);
+        Thickness eight = new Thickness(0, 468, 0, 0);
+        Thickness addbtnloc = new Thickness(0, 529, 0, 0);
+        public BookAdding()
         {
             InitializeComponent();
             selectedButton = btn1; // Select the "User" button by default
             selectedButton.Background = new SolidColorBrush(slcolor); // Set the initial background color for the selected button
-
         }
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -42,7 +47,10 @@ namespace WPF_LIBRARY
         {
             isDragging = false;
         }
-
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close(); // Close the window
+        }
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
             if (isDragging)
@@ -55,68 +63,59 @@ namespace WPF_LIBRARY
                 Top += offsetY;
             }
         }
-        private void txtPassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (txtPassword.Text == "Password")
-            {
-                txtPassword.Clear();
-                txtPassword.TextChanged += txtPassword_TextChanged;
-            }
-        }
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close(); // Close the window
-        }
-
-        private void txtPassword_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtPassword.Text))
-            {
-                txtPassword.Text = "Password";
-            }
-        }
-        private void txtPassword_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (txtPassword.Text != "Password")
-                txtPassword.Text = new string('*', txtPassword.Text.Length);
-
-        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button clickedButton = (Button)sender;
             Color rgbColor = (Color)ColorConverter.ConvertFromString("#E8DBB9");
 
-            // If the clicked button is already selected, do nothing
+
             if (clickedButton == selectedButton)
                 return;
 
 
-            // Restore the background color of the previously selected button
             if (selectedButton != null)
                 selectedButton.Background = new SolidColorBrush(rgbColor);
-            // Set the background color of the clicked button to yellow
+
             clickedButton.Background = new SolidColorBrush(slcolor);
 
 
-            // Update the selectedButton reference
+
             selectedButton = clickedButton;
             if (selectedButton == btn3)
             {
-                Contact.Visibility = Visibility.Hidden;
-                Addbutton.Margin = newbtnloc;
+                Authors.Visibility = Visibility.Collapsed;
+                Genre.Visibility = Visibility.Collapsed;
+                Language.Margin = two;
+                Tags.Margin = three;
+                Publisher.Margin = four;
+                Publishingdate.Margin = five;
+                ImagePath.Margin = six;
+                AddButton.Margin = seven;
             }
-            else
+            else if (selectedButton == btn2)
             {
-                Contact.Visibility = Visibility.Visible;
-                Addbutton.Margin = oldbtnloc;
+                Authors.Visibility = Visibility.Visible;
+                Genre.Visibility = Visibility.Collapsed;
+                Language.Margin = three;
+                Tags.Margin = four;
+                Publisher.Margin = five;
+                Publishingdate.Margin = six;
+                ImagePath.Margin = seven;
+                AddButton.Margin = eight;
             }
-        }
+            else {
+                Authors.Visibility = Visibility.Visible;
+                Genre.Visibility = Visibility.Visible;
+                Authors.Margin = two;
+                Genre.Margin= three;
+                Language.Margin= four;
+                Tags.Margin = five;
+                Publisher.Margin = six;
+                Publishingdate.Margin = seven;
+                ImagePath.Margin = eight;
+                AddButton.Margin = addbtnloc;
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            BookAdding bookAdding = new BookAdding();
-            bookAdding.Show();
-            this.Close();
+            }
         }
     }
 }
